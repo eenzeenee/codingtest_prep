@@ -10,7 +10,7 @@ out = []
 def back_tracking(depth, N, M):
     if depth == M:
         print(' '.join(map(str, out)))
-        return
+        return                      #### return 까먹지 말기
     for i in range(len(visited)):
         if not visited[i]:
             visited[i] = False
