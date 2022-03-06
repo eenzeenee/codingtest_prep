@@ -57,7 +57,7 @@ def check_attack(x):
 def Queen(x):   # x : queen을 배치하고자 하는 열의 위치
     global answer   # 미리 정의해 둔 변수를 재귀함수를 통해 그 값을 조정하고 싶은 경우 전역변수
     if x == N:      # 모든 열을 다 돈 경우
-        answer += 0 # 해당 경우의 수는 공격 불가한 경우이므로 answer에 1 더하기
+        answer += 1 # 해당 경우의 수는 공격 불가한 경우이므로 answer에 1 더하기
         return
 
     for i in range(N):  # 모든 열을 다 돌지 않은 경우 ~ 모든 열을 다 돌리기 위해
