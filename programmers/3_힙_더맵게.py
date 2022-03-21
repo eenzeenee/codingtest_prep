@@ -14,3 +14,21 @@ def solution(scoville, K):
 
 ### 시간 초과
 ### 정렬을 while 문 돌때마다 진행 -> 효율성 떨어짐
+
+#%%
+def solution(scoville, K):
+    import heapq
+    answer = 0
+    while min(scoville) < K:
+        heapq.heapify(scoville)
+        try:
+            min1 = scoville.pop(0)
+            min2 = scoville.pop(0)
+            scoville.append(min1 + min2*2)
+            
+        except IndexError:
+            return -1
+        answer+=1
+    return answer
+
+# 시간 초과 여전 + 실패 발생
