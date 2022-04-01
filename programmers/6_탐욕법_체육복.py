@@ -50,7 +50,7 @@ def solution(n, lost, reserve):
             set_lost.remove(i)
     return n - len(set_lost)
 
-# 실패 다수 발생
+# 실패 다수 발생 -> remove하면서 for 문 ~ 이상함!
 
 #%%
 def solution(n, lost, reserve):
