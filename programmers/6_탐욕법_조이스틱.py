@@ -36,7 +36,7 @@ def solution(name):
         alphas[idx] = 0
         
         if sum(alphas) == 0:
-            return answer
+            break
         
         left, right = 1, 1
         while alphas[idx - left] == 0:
