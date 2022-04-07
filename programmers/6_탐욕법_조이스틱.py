@@ -43,13 +43,13 @@ def solution(name):
             left += 1
         while alphas[idx + right] == 0:
             right += 1
-        
+        # 비교적 적은 수의 이동을 더하기
         if left < right:
             answer += left
-            idx -= left
+            idx -= left     # idx 이동시키기
         else:
             answer += right
-            idx += right
+            idx += right    # idx 이동시키기
 
     return answer
 
@@ -58,3 +58,49 @@ def solution(name):
 ## 모든 알파벳이 계산된 뒤 while 문 나와서 결과 반환
 
 # 정확성 74%......
+
+#%%
+def solution(name):
+    answer = 0
+    min_left_right = len(name)  # 왼쪽에서 오른쪽으로만 이동할 때
+    next_idx = 0
+
+    for idx, char in enumerate(name):
+        answer += min(ord(i) - ord('A'), ord('Z') - ord(i) + 1)
+
+        next_idx = idx + 1
+        while next_idx < len(name) and name[next_idx] == 'A':
+            next_idx += 1
+
+        min_left_right = min(min_left_right, idx + idx + len(name) - next_idx)
+        # idx + idx + len(name) - next_idx : 오른쪽으로 이동했다가 왼쪽으로 다시 이동하는 경우
+        # min_left_right : 왼쪽에서 오른쪽으로 한 방향으로만 이동하는 경우
+        ## 둘을 비교하여 작은 수만 이동수로
+    answer += min_left_right
+
+    return answer
+## 또 실패..
+
+#%%
+#%%  해설... 이해해보자...
+def solution(name):
+    if set(name) == {'A'}:
+        return 0
+
+    answer = float('inf')
+    for i in range(len(name) // 2): # 반 이상 움직일 필요 없음
+        left_moved = name[-i:]+name[:-i]    # 왼쪽에서 오른쪽으로
+        right_moved = name[i:]+name[:i]     # 오른쪽에서 왼쪽으로 -> 왼쪽에서 오른쪽으로
+        for n in [left_moved, right_moved[0]+right_moved[:0:-1]]:
+            while n and n[-1] == 'A':
+                n = n[:-1]
+
+            row_move = i + len(n)-1     # 커서 이동 횟수
+            col_move = 0
+            for c in map(ord, n):
+                col_move += min(c - 65, 91 - c)     # 알파벳 이동 횟수
+
+            answer = min(answer, row_move + col_move)
+
+    return answer
+# 성공
